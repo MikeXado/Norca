@@ -11,8 +11,8 @@ function SubForm() {
         <div
           className={
             state === "block"
-              ? "xl:flex xl:items-center xl:space-x-[24px] space-y-[24px]"
-              : " space-y-[24px]"
+              ? "xl:flex xl:items-center xl:space-x-[24px] xl:space-y-0  space-y-[24px]"
+              : "  space-y-[24px]"
           }
         >
           <div className="w-full">
@@ -32,8 +32,8 @@ function SubForm() {
         <div
           className={
             state === "block"
-              ? "xl:flex xl:items-center xl:space-x-[24px] space-y-[24px]"
-              : " space-y-[24px]"
+              ? "xl:flex xl:items-center xl:space-x-[24px] xl:space-y-0  space-y-[24px]"
+              : "  space-y-[24px]"
           }
         >
           <div className="w-full">
@@ -47,8 +47,8 @@ function SubForm() {
         <div
           className={
             state === "block"
-              ? "xl:flex xl:items-center xl:space-x-[24px] space-y-[24px]"
-              : " space-y-[24px]"
+              ? "xl:flex xl:items-center xl:space-x-[24px] xl:space-y-0  space-y-[24px]"
+              : "  space-y-[24px]"
           }
         >
           <div className="w-full">
