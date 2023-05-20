@@ -1,27 +1,48 @@
-"use client";
-import React from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-export default function Select({
-  label,
-  options,
-}: {
+interface PageProps {
+  width: string;
   label: string;
-  options: { id: number; value: string; name: string }[];
-}) {
+  options: {
+    value: any;
+    name: string;
+    id: number;
+  }[];
+}
+
+export default function BasicSelect({ width, label, options }: PageProps) {
+  const [value, setValue] = React.useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setValue(event.target.value as string);
+  };
+
   return (
-    <div className="relative w-full">
-      <select className="border h-[56px] border-gray-300 rounded-md focus:border-indigo-500 outline-none py-2 px-4 block w-full">
-        {options.map((el) => {
-          return (
-            <option key={el.id} value={el.value}>
-              {el.name}
-            </option>
-          );
-        })}
-      </select>
-      <label className="absolute top-0 left-3 bg-white px-2 -translate-y-1/2 text-gray-600 text-sm transition-all">
-        {label}
-      </label>
-    </div>
+    <Box sx={{ minWidth: width }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={value}
+          label={label}
+          defaultValue="373"
+          onChange={handleChange}
+        >
+          {options.map((option) => {
+            return (
+              <MenuItem key={option.id} value={option.value}>
+                {option.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
+    </Box>
   );
 }

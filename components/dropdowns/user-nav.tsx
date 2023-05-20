@@ -1,54 +1,93 @@
-"use client";
-
-import Image from "next/image";
 import React, { useState } from "react";
-import ArrowBottom from "../../assets/sidebar/arrow-bottom.svg";
-function UserNav() {
-  const [isOpen, setIsOpen] = useState(false);
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Box } from "@mui/material";
+import Image from "next/image";
 
-  const handleOpenDropdown = () => {
-    setIsOpen((prev) => !prev);
+interface User {
+  name: string;
+  position: string;
+  avatar: string;
+}
+
+const user: User = {
+  name: "Tania-Otilia Oltean",
+  position: "Notar",
+  avatar: "/Avatar.png",
+};
+
+export default function UserNav() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <div className="relative">
-      <button onClick={handleOpenDropdown} className="flex items-center">
-        <Image src="/Avatar.png" alt="avatar" width={40} height={40} />
-        <div className="flex ml-[16px]">
-          <div>
-            <span className="block text-[16px] text-[#000000DE] tracking-wide  text-">
-              Tania-Otilia Oltean
-            </span>
-            <span className="block text-left text-[14px] text-[#00000099] tracking-wide">
-              Notar
-            </span>
-          </div>
-          <ArrowBottom className="ml-[13px]  w-[10px] text-[#0000008A]" />
-        </div>
-      </button>
-
-      <div
-        id="dropdown"
-        className={
-          "z-10 bg-white divide-y absolute top-12 w-full divide-gray-100 rounded-lg shadow-lg " +
-          (!isOpen && " hidden")
-        }
+    <div className="flex justify-end w-full relative text-[#0000008A]">
+      <Button
+        aria-controls="user-menu"
+        aria-haspopup="true"
+        color="inherit"
+        onClick={handleClick}
+        endIcon={<ArrowDropDownIcon className="hidden sm:block" />}
+        startIcon={<Avatar src={user.avatar} alt={user.name} />}
       >
-        <ul className="py-2 text-sm text-gray-700 ">
-          <li>
-            <a href="#" className="block px-4 py-2 hover:bg-gray-100 ">
-              Settings
-            </a>
-          </li>
-
-          <li>
-            <a href="#" className="block px-4 py-2 hover:bg-gray-100 ">
-              Sign out
-            </a>
-          </li>
-        </ul>
-      </div>
+        <div className="sm:block hidden">
+          <Typography
+            color="#000000DE"
+            fontSize={14}
+            letterSpacing={0}
+            textTransform="none"
+            lineHeight="160%"
+            variant="subtitle1"
+            textAlign="left"
+          >
+            {user.name}
+          </Typography>
+          <Typography
+            textAlign="left"
+            textTransform="none"
+            letterSpacing="none"
+            variant="body2"
+            color="#00000099"
+          >
+            {user.position}
+          </Typography>
+        </div>
+      </Button>
+      <Menu
+        id="user-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        PaperProps={{
+          style: {
+            width: anchorEl ? anchorEl.offsetWidth : undefined,
+          },
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
     </div>
   );
 }
-
-export default UserNav;

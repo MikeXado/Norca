@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import InputWithLabelOnTop from "../ui/Input";
-import Select from "../ui/Select";
-import { LayoutContext } from "@/context/LayoutProvider";
 
+import { LayoutContext } from "@/context/LayoutProvider";
+import BasicSelect from "../ui/Select";
+import TextField from "@mui/material/TextField/TextField";
 function SubForm() {
   const { state } = useContext(LayoutContext);
   return (
@@ -16,15 +16,19 @@ function SubForm() {
           }
         >
           <div className="w-full">
-            <Select
+            <BasicSelect
+              width="100%"
               label="Selectează cetățenia"
               options={[{ id: 1, name: "Romana", value: "Romana" }]}
             />
           </div>
           <div className="w-full">
-            <InputWithLabelOnTop
+            <TextField
+              id="outlined-number"
+              fullWidth
               label="IDNP 13 cifre"
-              placeholder="2002348245512"
+              type="number"
+              placeholder="2002333888223"
             />
           </div>
         </div>
@@ -37,10 +41,22 @@ function SubForm() {
           }
         >
           <div className="w-full">
-            <InputWithLabelOnTop label="Cod fiscal" placeholder="123456789" />
+            <TextField
+              id="outlined-number"
+              fullWidth
+              label="Cod fiscal"
+              type="text"
+              placeholder="12312wwwdsk"
+            />
           </div>
           <div className="w-full">
-            <InputWithLabelOnTop label="Numele" placeholder="Ion" />
+            <TextField
+              id="outlined-number"
+              fullWidth
+              label="Numele"
+              type="text"
+              placeholder="Ion"
+            />
           </div>
         </div>
 
@@ -52,11 +68,20 @@ function SubForm() {
           }
         >
           <div className="w-full">
-            <InputWithLabelOnTop label="Prenumele" placeholder="Ungureanu" />
+            <TextField
+              id="outlined-number"
+              fullWidth
+              label="Prenumele"
+              type="text"
+              placeholder="Ungureanu"
+            />
           </div>
           <div className="w-full">
-            <InputWithLabelOnTop
+            <TextField
+              id="outlined-number"
+              fullWidth
               label="Prenumele Tatălui"
+              type="text"
               placeholder="Vasile"
             />
           </div>
