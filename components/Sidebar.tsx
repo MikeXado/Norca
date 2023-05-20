@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -16,7 +17,6 @@ import { usePathname } from "next/navigation";
 import { IconButton, ListSubheader } from "@mui/material";
 import { SidebarContext } from "@/context/SidebarProvider";
 import Link from "next/link";
-import { symbolName } from "typescript";
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const [submenuOpen, setSubmenuOpen] = React.useState(true);
