@@ -1,29 +1,46 @@
 "use client";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import Image from "next/image";
 import UserNav from "./dropdowns/user-nav";
-import ChevronLeft from "../assets/sidebar/chevron-left.svg";
-import { useContext } from "react";
 import { SidebarContext } from "@/context/SidebarProvider";
 
-function Navbar() {
-  const { state, setState } = useContext(SidebarContext);
+export default function Navbar() {
+  const [auth, setAuth] = React.useState(true);
+  const { setState } = React.useContext(SidebarContext);
 
   return (
-    <nav className="max-w-[1832px] bg-white  flex items-center py-[15px] px-[16px] justify-between">
-      <div className="flex items-center">
-        <Image src="/logo-norca.png" alt="norca" width={93} height={34} />
-
-        <button
-          onClick={() => setState((prev) => !prev)}
-          className="ml-3 sm:hidden"
-        >
-          <ChevronLeft className={"w-[8px]" + (state ? " rotate-180" : " ")} />
-        </button>
-      </div>
-      <UserNav />
-    </nav>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        className="bg-white"
+        sx={{
+          borderBottom: "1px solid #e0e0e0",
+        }}
+      >
+        <Toolbar className="sm:max-w-[1832px]">
+          <div className="lg:hidden">
+            <IconButton
+              onClick={() => {
+                setState((prev) => !prev);
+              }}
+              size="large"
+              edge="start"
+              color="default"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
+          <Image src="/logo-norca.png" alt="norca" width={93} height={34} />
+          {auth && <UserNav />}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
-
-export default Navbar;

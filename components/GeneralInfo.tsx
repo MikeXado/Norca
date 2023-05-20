@@ -9,7 +9,7 @@ import { LayoutContext } from "@/context/LayoutProvider";
 function GeneralInfo() {
   const { state } = useContext(LayoutContext);
   return (
-    <div className="bg-[#1976D20A] p-[24px] rounded-[8px]">
+    <div className="bg-[#1976D20A] p-[24px] w-full rounded-[8px]">
       <form>
         <div
           className={
